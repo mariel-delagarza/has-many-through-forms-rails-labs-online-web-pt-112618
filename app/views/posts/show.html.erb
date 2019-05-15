@@ -9,6 +9,13 @@ Categories: <br>
   <%end%>
 </ul>
 
+Comments: <br>
+<ul>
+  <%= @post.comments.each do |comment| %>
+    <li><%= comment.user.username%> says: <%= comment.content %></li>
+  <%end%>
+</ul>
+
 Create a new comment:<br>
   <%= form_for @post.comments.build do |f| %>
     <%= f.hidden_field :post_id, value: @post.id %>
