@@ -3,5 +3,5 @@
   <%= f.text_field :title %> 
   <%= f.label :content %>
   <%= f.text_area :content %>
-  <%= f.collection_check_boxes 
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
   
