@@ -4,4 +4,10 @@
   <%= f.label :content %>
   <%= f.text_area :content %>
   <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
-  
+  <br>
+  <p>Create a new category:</p>
+  <%= f.fields_for :categories do |cat| %>
+    Name: <%= cat.text_field :name %>
+  <%end%>
+  <%= f.submit %>
+<% end %>
