@@ -24,14 +24,7 @@ Create a new comment:<br>
     <%= f.submit %>
   <% end %>
 
- <h4>Categories: </h4>
-<ul>
-  <% @post.categories.each do |category| %>
-    <li><%= category.name %></li>
-  <% end %>
-</ul>
-
- <h4>Username: </h4>
+Username: <br>
 <ul>
   <% @post.users.uniq.each do |user| %>
     <li><%= link_to user.username, user_path(user) %></li>
