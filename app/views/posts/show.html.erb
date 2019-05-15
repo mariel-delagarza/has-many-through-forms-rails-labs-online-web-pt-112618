@@ -9,23 +9,31 @@ Categories: <br>
   <%end%>
 </ul>
 
-Comments: <br>
+Create a new comment:<br>
+  <%= form_for @post.comments.build do |f| %>
+    <%= f.hidden_field :post_id, value: @post.id %>
+    Comment: <br>
+    <%= f.text_area :content %><br>
+    <p>Select an existing username:</p>
+    <%= f.hidden_field :post_id, value: @post.id %>
+    <%= f.collection_select :user_id, User.all, :id, :username, include_blank: true %>
+    <p>or create a new user</p>
+    <%= f.fields_for :user, f.object.build_user do |user| %>
+      <%= user.text_field :username  %>
+    <% end %></br>
+    <%= f.submit %>
+  <% end %>
+
+ <h4>Categories: </h4>
 <ul>
-  <% @post.comments.each do |comment| %>
-  <li><%= comment.content %></li>
-  <%end%>
+  <% @post.categories.each do |category| %>
+    <li><%= category.name %></li>
+  <% end %>
 </ul>
 
-Users: <br>
+ <h4>Username: </h4>
 <ul>
   <% @post.users.uniq.each do |user| %>
-  <li><%= link_to user.username, user_path(user) %></li>
-  <%end%>
+    <li><%= link_to user.username, user_path(user) %></li>
+  <% end %>
 </ul>
-
-  <%= form_for @comment do |f| %>
-    <%= f.text_area :content %>
-    <%= collection_select(:comment, :user_id, User.all, :id, :username) %>
-    <input type="text" id="comment_user_attributes_username" name="comment[users_attributes][username]" />
-    <%= f.submit %>
-  <%= end %>
